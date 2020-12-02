@@ -1,42 +1,20 @@
 #!/usr/bin/env python
 from typing import List, Tuple
+from itertools import combinations
 
 
-def find_pairs_of_sum(summa: int, start: List[str]) -> List[Tuple[int,int]]:
+def find_pairs_of_sum(s: int, start: List[str], elements: int) -> Tuple[int,int]:
     lines = list(map(int, start))
-    sorted_list = list(sorted(lines))
-    reversed_list = list(reversed(sorted_list))
-    result = []
-    i = 0;
-    while len(sorted_list):
-        print("iteration {}".format(i))
-        a = sorted_list.pop()
-        rev_work_list = list(filter(lambda x: x <= a, reversed_list))
-        print("len of rev work list {}".format(len(rev_work_list)))
-        while len(rev_work_list):
-            b = rev_work_list.pop()
-            print("checking {} and {}".format(a, b))
-            if (a + b) > summa:
-                print("greater sum")
-                break
-            if (a + b) == summa:
-                print("found match")
-                result.append((a,b))
-        
-        i += 1
-    
-    return result
-    # # for line in lines:
-    #     print("{} line number {}".format(line.strip(), i))
-    #     i +=  1
+    result = list(filter(lambda x: sum(x) == s,combinations(lines, elements)))
+    return result[0]
 
 with open("input.txt") as input:
     i = 1;
     lines = input.readlines()
-    matches = find_pairs_of_sum(2020, lines)
+    matches_of_two = find_pairs_of_sum(2020, lines, 2)
+    matches_of_three = find_pairs_of_sum(2020, lines, 3)
 
-    for match in matches:
-        print(match)
-        print("answer: {}".format(match[0] * match[1]))
+    print("answer part1: {}  ({})".format(matches_of_two[0] * matches_of_two[1], str(matches_of_two)))
+    print("answer part2: {}  ({})".format(matches_of_three[0] * matches_of_three[1] * matches_of_three[2], str(matches_of_three)))
 
     
