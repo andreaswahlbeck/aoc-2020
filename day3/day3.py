@@ -3,7 +3,6 @@
 def init_map(lines):
     m = []
     for line in lines:
-        print(line)
         m.append([char for char in line.strip()])
     
     return m
@@ -21,24 +20,16 @@ def traverse_map(m,sy,sx):
         x += sx
         y += sy
 
-        if x < x_len:
-            x_pos = x
-        else:
-            x_pos = (x % x_len)
-
-        print("x: {} x_pos:{} y: {}".format(x,x_pos,y))
-        print("at post: {}".format(m[y-1][x_pos-1]))
+        x_pos = (x % x_len)
 
         if m[y-1][x_pos-1] == '#':
             mark = 'X'
             hits += 1
         else:
             mark = '0'
-        print("mark: {}".format(mark))
         
         positions.append((x,y,mark))
 
-    print(positions)
     return hits
 
 with open("input.txt") as input:
