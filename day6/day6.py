@@ -22,7 +22,7 @@ def uniq_yes_answers(group):
 
     return y
 
-def all_yes_answer_in_groups(groups):
+def all_yes_answers_in_groups(groups):
     r = []
     for g in groups:
         all_yes = set()
@@ -35,8 +35,9 @@ def all_yes_answer_in_groups(groups):
 
 with open("input.txt") as input:
     groups = extract_groups_from_file(input)
+    
     u_yes_a = list(map(lambda g: uniq_yes_answers(g), groups))
     print("part 1 unique yes anserws sum: {}".format(sum(map(lambda a: len(a),u_yes_a))))
     
-    common_yes_anserws_per_group = all_yes_answer_in_groups(groups)
-    print("part 2 common yes answers sum: {}".format(sum(map(lambda a: len(a), common_yes_anserws_per_group))))
+    common_yes_answers_per_group = all_yes_answers_in_groups(groups)
+    print("part 2 common yes answers sum: {}".format(sum(map(lambda a: len(a), common_yes_answers_per_group))))
